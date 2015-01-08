@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Shablam</title>
+		<meta charset="utf8">
+		<style type="text/css">
+			.imageDiv{
+				width: ;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="images"></div>
+		<script src="ocrad.js"></script>
+		<script>
+			var spacequences=[];
+
+			function getImageText(imageFileName){
+				var newImg=new Image();
+				newImg.src="images/"+imageFileName;
+				var d = new Date()
+				var n = d.getTime();
+				newImg.onload=function(){
+					console.log("Delay: \n", (n-d.getTime())+"ms");
+
+					// Get the image
+					canvasImage=convertImageToCanvas(newImg);
+								
+					var string1=OCRAD(canvasImage);
+					
+					//console.log("Image text: \n",string1);
+
+					document.getElementById('images').appendChild(newImg);
+					var newDiv=document.createElement("div");
+					newDiv.className='imageDiv';
+					newDiv.style.width=newImg.width+"px";
+					var newText=document.createTextNode(string1);
+					document.getElementById('images').appendChild(newDiv);
+					newDiv.appendChild(newText);
+					
+					spacequences.push(new Spacequence(string1));
+					//console.log(spacequences)
+
+				}
+				
+			}
+			function convertImageToCanvas(theImage) {
+				var canvas = document.createElement("canvas");
+				canvas.width = theImage.width;
+				canvas.height = theImage.height;
+				canvas.getContext("2d").drawImage(theImage, 0, 0);
+				return canvas;
+			}
+			window.onload=function(){
+				getImageText("short.png");
+				getImageText("short1.png");
+				getImageText("short2.png");
+				getImageText("short3.png");
+				getImageText("short5.png");
+				getImageText("short3r.png");
+				
+				// document.getElementById('images').onload=function(){
+				// 	spacequences.forEach(function(spacequence){
+				// 		console.log(spacequence)
+				// 	})
+				// }
+			}
+			
+			var Spacequence = function(theString){
+				this.words=theString.split(" ");
+				this.spaces=this.words.length-1;
+				this.pattern=getPattern(this.words)
+				
+				// console.log("New Spacequence",this);
+			}
+			function getPattern(array){
+				var pattern=[];
+				array.forEach(function(word){
+					pattern.push(word.length);
+				});
+				return(pattern);
+			}
+
+
+
+		</script>
+	</body>
+</html>

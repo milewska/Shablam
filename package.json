@@ -1,0 +1,28 @@
+{
+	"name": "shablam",
+	"version": "0.0.1",
+	"description": "A JavaScript text Shazam.",
+	"author": "Beneath the Ink <info@beneaththeink.com>",
+	"contributors": [
+		{
+			"name": "Alex Milewski",
+			"email": "alex@beneaththeink.com",
+			"url": "http://whyalex.com"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/BeneathTheInk/shablam.git"
+	},
+	"main": "./lib/shablam.js",
+	"dependencies": {
+		"tesseract.js": "0.0.1"
+	},
+	"devDependencies": {
+	},
+	"license": "MIT",
+	"keywords": [
+		"shablam",
+		"text"
+	]
+}
