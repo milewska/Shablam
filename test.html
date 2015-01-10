@@ -11,6 +11,9 @@
 		</style>
 	</head>
 	<body>
+		<p>
+			<input type="button" value="compare" onclick="compareSpacequence()" />
+		</p>
 		<div id="images"></div>
 		<script src="ocrad.js"></script>
 		<script>
@@ -22,15 +25,13 @@
 				var d = new Date()
 				var n = d.getTime();
 				newImg.onload=function(){
-					console.log("Delay: \n", (n-d.getTime())+"ms");
+																			console.log("Delay: \n", (n-d.getTime())+"ms");
 
 					// Get the image
 					canvasImage=convertImageToCanvas(newImg);
 								
 					var string1=OCRAD(canvasImage);
 					
-					//console.log("Image text: \n",string1);
-
 					document.getElementById('images').appendChild(newImg);
 					var newDiv=document.createElement("div");
 					newDiv.className='imageDiv';
@@ -40,8 +41,6 @@
 					newDiv.appendChild(newText);
 					
 					spacequences.push(new Spacequence(string1));
-					//console.log(spacequences)
-
 				}
 				
 			}
@@ -59,12 +58,6 @@
 				getImageText("short3.png");
 				getImageText("short5.png");
 				getImageText("short3r.png");
-				
-				// document.getElementById('images').onload=function(){
-				// 	spacequences.forEach(function(spacequence){
-				// 		console.log(spacequence)
-				// 	})
-				// }
 			}
 			
 			var Spacequence = function(theString){
@@ -72,7 +65,7 @@
 				this.spaces=this.words.length-1;
 				this.pattern=getPattern(this.words)
 				
-				// console.log("New Spacequence",this);
+																				console.log("New Spacequence",this);
 			}
 			function getPattern(array){
 				var pattern=[];
@@ -81,7 +74,19 @@
 				});
 				return(pattern);
 			}
+			function compareSpacequence(){
+				var compared = [];
+																				console.log(spacequences);
+				spacequences.forEach(function(spacequence){
+					spacequences.forEach(function(subquence){
+						spacequence.pattern.forEach(function(num,index){
 
+							compared.push(num-subquence.pattern[index])
+						})
+					})
+				})
+				console.log(compared)
+			}
 
 
 		</script>
